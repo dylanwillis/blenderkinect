@@ -1,13 +1,11 @@
 import sys
-sys.path.append("/home/dylan/Downloads/bwhite-libfreenect-d55c379/python/")
+
+sys.path.append("/home/dylan/Desktop/OpenKinect-libfreenect-116570b/c/python/")
 from freenect import *
 
 from Blender import *
-
 import Blender, meshtools
-import re, struct, StringIO
 
-import cv
 import numpy as np
 
 def drawmesh(mesh):
@@ -15,18 +13,15 @@ def drawmesh(mesh):
 	Blender.Redraw()
 
 def display(dev, data, timestamp):
-	print "Looping Now"
 	data -= np.min(data.ravel())
 	mesh = Blender.NMesh.GetRaw()
-	for y in range(0,480,10):
-		for x in range(0,640,10):
-			z = data[y,x]
-			zz = z
+	for y in range(0,480,5):
+		for x in range(0,640,5):
+			zz = data[y,x]
 			if(zz<1000):
 				xx = (x-320)*(zz-10)*0.0021  #This 'calibration' copied using Zephod's windows software - because it 'just works'
 				yy = (y-240)*(zz-10)*0.0021
 				zz-=200
-				zz*=-1
-				mesh.verts.append(Blender.NMesh.Vert(xx, yy, zz))
+				mesh.verts.append(NMesh.Vert(xx, yy, -zz))
 	drawmesh(mesh)
-runloop(depth_cb_factory(display), lambda *x: None)
+runloop(depth_cb_np_factory(display), lambda *x: None)
