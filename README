@@ -1,0 +1,18 @@
+This is the first basic implementation of a Kinect interface in Blender.
+
+Right now, you have to have Brandyn's python stuff installed - which requires
+quite a few dependencies, I may be using an old version, but I'll get onto
+looking at that later.
+
+Loading it into Blender with the "Text File" internal thing right now, running
+by pressing Alt+P - it does some weird thing where it only iterates through
+4-6 times.  I'll have to figure out why it does that.
+
+
+
+Credits:
+
+I used Brandyn's python front-end for Kinect, and reference that in the source code.
+
+Also, I used a little part of the PLY import by Bruce Merry, to get just
+the vertices to show up, and no other parts of the mesh.
